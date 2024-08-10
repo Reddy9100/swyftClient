@@ -27,7 +27,7 @@ const NavbarMobile = () => {
   return (
     <div>
       {/* Mobile and small screens */}
-      <div className="navbar-mobile fixed bottom-0 left-0 right-0 h-[10vh] bg-white shadow-lg rounded-tr-lg rounded-tl-lg flex justify-around items-center text-gray-700 md:hidden">
+      <div className="navbar-mobile fixed bottom-0 left-0 right-0 h-[12vh] bg-white shadow-lg rounded-tr-lg rounded-tl-lg flex justify-around items-center text-gray-700 md:hidden">
         <Link to="/categories">
           <div className='flex flex-col items-center text-sm'>
             <TbCategory2 className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
@@ -65,7 +65,7 @@ const NavbarMobile = () => {
         </div>
         <Link to="/categories" className='flex items-center mb-4  text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg'>
           <TbCategory2 className='text-3xl text-gray-500 hover:text-orange-600'/>
-          <p className='ml-2'>Categories</p>
+          <p className='ml-2'>Types</p>
         </Link>
         <Link to="/" className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg'>
           <FaHome className='text-3xl text-gray-500 hover:text-orange-600'/>

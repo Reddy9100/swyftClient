@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Cookie from "js-cookie";
 import { Link, useNavigate } from 'react-router-dom';
 import grocery from "../assets/grocery.jpg";
@@ -14,7 +14,7 @@ import ice from "../assets/ice.json";
 import bannerbird from "../assets/bannerbird.jpeg";
 import icecream from "../assets/cream.jpg";
 import coke from "../assets/coke.jpg";
-import choclate from "../assets/choclate.jpg";
+import choclate from "../assets/choclate.jpg"
 import iced from "../assets/iced.jpg";
 import tea from "../assets/tea.jpg";
 import biscuit from "../assets/biscuit.jpg";
@@ -68,10 +68,8 @@ const Categories = () => {
     { image: biscuit, label: "Biscuits & Cookies", link: "/biscuits-cookies" },
   ];
 
-  const getColSpan = (index) => {
-    const pattern = [2, 3, 5, 6];
-    return pattern[index % pattern.length];
-  };
+  // Function to get a random column span between 1 and 4
+  const getRandomColSpan = () => Math.floor(Math.random() * 2) + 1;
 
   return (
     <div className='bg-white md:ml-60 h-screen overflow-y-auto'>
@@ -80,7 +78,7 @@ const Categories = () => {
         <h2 className='text-lg md:text-xl font-bold'>All Categories</h2>
       </div>
       <hr className='border-t border-gray-300' />
-      
+
       {/* Grocery & Kitchen Section */}
       <div className='p-4'>
         <div className='flex items-center'>
@@ -96,14 +94,14 @@ const Categories = () => {
               image={category.image} 
               label={category.label} 
               link={category.link} 
-              colSpan={getColSpan(index)} 
+              colSpan={getRandomColSpan()} 
             />
           ))}
         </div>
       </div>
 
       {/* Snacks & Drinks Section */}
-      <div className='p-4 mt-10 md:mt-20'>
+      <div className='p-4 mb-10 mt-10 md:mt-20'>
         <div className='flex items-center'>
           <div className='h-[60px] md:h-[120px] shadow-sm border border-5 border-orange-500 rounded-[90%] p-2'>
             <Lottie options={defaultOptions2} />
@@ -117,7 +115,7 @@ const Categories = () => {
               image={category.image} 
               label={category.label} 
               link={category.link} 
-              colSpan={getColSpan(index)} 
+              colSpan={getRandomColSpan()} 
             />
           ))}
         </div>
@@ -129,11 +127,11 @@ const Categories = () => {
 const CategoryItem = ({ image, label, link, colSpan }) => {
   return (
     <Link to={link} className={`text-center h-32 col-span-${colSpan} block`}>
-      <div className="relative">
+      <div className="relative bg-opacity-100 backdrop-blur-3xl hover:backdrop-blur-none">
         <img 
           src={image} 
           alt={label} 
-          className="h-[70px] md:h-[150px] w-full bg-gray-200 shadow-lg p-1 rounded-md" 
+          className="h-[70px] md:h-[140px] w-full  shadow-lg p-1 rounded-md" 
         />
         <h3 className='font-medium text-xs md:text-lg mt-2'>{label}</h3>
       </div>

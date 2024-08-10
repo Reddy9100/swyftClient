@@ -7,11 +7,14 @@ import Dashboard from './components/Dashboard';
 import NavbarMobile from './components/NavbarMobile';
 import SignupModal from "./components/signupModal";
 import Vegetables from './components/Vegetables';
-
+import Dairy from './components/Dairy';
+import AttaComponent from './components/Atta';
 const App = () => {
   const [showInitialScreen, setShowInitialScreen] = useState(true);
-  const [items, setItems] = useState([]);
+  
   const[vegetables,setVegetables] = useState([])
+  const[DairyItems,setDairy] = useState([])
+  const[Atta,setAtta] = useState([])
 
   useEffect(() => {
     // Fetch data when component mounts
@@ -20,6 +23,8 @@ const App = () => {
         const response = await axios.get("http://localhost:5000/items");
         console.log("Fetched data:", response.data); // Log the response
         setVegetables(response.data);
+        setDairy(response.data)
+        setAtta(response.data)
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -37,7 +42,8 @@ const App = () => {
   }, []);
   console.log(vegetables)
   const filterVegetables = vegetables.filter((item) => item.category === 'fruit' || item.category === 'vegetable');
-
+  const filterDairy = DairyItems.filter((item) => item.category === "dairy")
+  const filterAtta = Atta.filter((item) => item.category === "atta")
   
   return (
 
@@ -51,6 +57,8 @@ const App = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/categories" element={<Categories />} />
             <Route path="/vegetables&fruits" element={<Vegetables items={filterVegetables} />} />
+            <Route path='dairy-bread-eggs' element={<Dairy items={filterDairy}/>} />
+            <Route path='atta-rice-oil-dals' element={<AttaComponent items ={filterAtta}/>}/>
           </Routes>
           <NavbarMobile />
         </Router>

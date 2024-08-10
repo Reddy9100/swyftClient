@@ -67,6 +67,7 @@ const Loginform = () => {
         <Dashboard /> 
       ) : (
         <Modal
+        width={400}
           centered
           open={modal2Open}
           onCancel={() => setModal2Open(false)}
@@ -137,7 +138,7 @@ const Loginform = () => {
             </button>
             <br />
             {!isSignup && (
-              <span className="text-orange-500">Don't have an account? <Link to="//ogin">Sign Up</Link></span>
+              <span className="text-orange-500">Don't have an account? <Link to="/login">Sign Up</Link></span>
             )}
           </form>
         </Modal>
