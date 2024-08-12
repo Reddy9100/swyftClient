@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ScreenSaver from '../assets/ScreenSaver.gif';
+import ScreenSaver from '../assets/screensaver.gif';
 import Dashboard from './Dashboard';
 import SignupModal from "./signupModal"
 const InitialScreen = () => {
