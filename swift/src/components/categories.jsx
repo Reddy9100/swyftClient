@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Cookie from "js-cookie";
+
 import { Link, useNavigate } from 'react-router-dom';
 import grocery from "../assets/grocery.jpg";
 import dairy from '../assets/dairy.jpg';
@@ -19,7 +19,7 @@ import iced from "../assets/iced.jpg";
 import tea from "../assets/tea.jpg";
 import biscuit from "../assets/biscuit.jpg";
 import lays from "../assets/lays.jpg";
-
+import vegetablesImg from "../assets/vegetables.jpg"
 const Categories = () => {
   const defaultOptions = {
     loop: true,
@@ -30,14 +30,7 @@ const Categories = () => {
     }
   };
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const token = Cookie.get('loginToken');
-    if (!token) {
-      navigate('/login');
-    }
-  }, [navigate]);
+  
 
   const defaultOptions2 = {
     loop: true,
@@ -49,7 +42,7 @@ const Categories = () => {
   };
 
   const categories1 = [
-    { image: grocery, label: "Fruits & Vegetables", link: "/vegetables&fruits" },
+    { image: vegetablesImg, label: "Fruits & Vegetables", link: "/vegetables&fruits" },
     { image: dairy, label: "Dairy, Bread & Eggs", link: "/dairy-bread-eggs" },
     { image: rice, label: "Atta, Rice, Oil & Dals", link: "/atta-rice-oil-dals" },
     { image: meat, label: "Meat, Fish & Eggs", link: "/meat-fish-eggs" },
@@ -72,7 +65,7 @@ const Categories = () => {
   const getRandomColSpan = () => Math.floor(Math.random() * 2) + 1;
 
   return (
-    <div className='bg-white md:ml-60 h-screen overflow-y-auto'>
+    <div className='bg-white md:ml-36 lg:ml-48 xl:ml-56 h-screen overflow-y-auto'>
       <img src={bannerbird} className='h-[30vh] md:h-[50vh] w-full' alt="Banner" />
       <div className='flex mt-4 justify-around items-center'>
         <h2 className='text-lg md:text-xl font-bold'>All Categories</h2>
@@ -87,7 +80,7 @@ const Categories = () => {
           </div>
           <h2 className='text-md ml-3 md:text-lg font-bold mb-2'>Grocery & Kitchen</h2>
         </div>
-        <div className='grid mt-6 grid-cols-4 gap-4 md:gap-20'>
+        <div className='grid mt-6 grid-cols-3 md:grid-cols-3 lg:grid-cols-4  gap-4 md:gap-20'>
           {categories1.map((category, index) => (
             <CategoryItem 
               key={index} 
@@ -108,7 +101,7 @@ const Categories = () => {
           </div>
           <h2 className='text-md ml-3 md:text-lg font-bold mb-2'>Snacks & Drinks</h2>
         </div>
-        <div className='grid mt-6 md:mt-10 grid-cols-4 gap-4 md:gap-20 md:mb-5'>
+        <div className='grid mt-6 md:mt-10 mb-10  md:grid-cols-3 lg:grid-cols-4 grid-cols-3 gap-4 md:gap-20 md:mb-5'>
           {categories2.map((category, index) => (
             <CategoryItem 
               key={index} 
@@ -127,11 +120,12 @@ const Categories = () => {
 const CategoryItem = ({ image, label, link, colSpan }) => {
   return (
     <Link to={link} className={`text-center h-32 col-span-${colSpan} block`}>
-      <div className="relative bg-opacity-100 backdrop-blur-3xl hover:backdrop-blur-none">
+      <div className="relative p-2 rounded-md shadow-xl hover:shadow-2xl transition-shadow duration-300">
         <img 
           src={image} 
           alt={label} 
-          className="h-[70px] md:h-[140px] w-full  shadow-lg p-1 rounded-md" 
+          loading='lazy'
+          className="h-[70px] md:h-[140px] w-full p-1 rounded-md" 
         />
         <h3 className='font-medium text-xs md:text-lg mt-2'>{label}</h3>
       </div>

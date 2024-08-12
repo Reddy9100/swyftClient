@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdAdd,IoMdRemove } from "react-icons/io";
 import axios from "axios";
 
-const Atta = ({ items }) => {
+const Ice = ({ items }) => {
   const [quantities, setQuantities] = useState({});
 
   // Get userId from localStorage
@@ -117,4 +117,4 @@ const Atta = ({ items }) => {
   );
 };
 
-export default Atta;
+export default Ice;

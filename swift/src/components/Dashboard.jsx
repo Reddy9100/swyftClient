@@ -2,20 +2,11 @@ import React, { useEffect } from 'react';
 import NavbarMobile from './NavbarMobile';
 import Lottie from 'react-lottie';
 import grocery from "../assets/dashboard.json";
-import Cookie from "js-cookie";
-import { useNavigate } from 'react-router-dom'; // Assuming you are using react-router-dom for navigation
+// Assuming you are using react-router-dom for navigation
 
 const Dashboard = () => {
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = Cookie.get('loginToken');
-    
-    if (!token) {
-      
-      navigate('/login');
-    }
-  }, [navigate]);
+ 
 
   const defaultOptions = {
     loop: true,
@@ -25,6 +16,9 @@ const Dashboard = () => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
+  
+
+  
 
   return (
     <>
