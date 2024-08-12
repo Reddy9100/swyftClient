@@ -8,9 +8,11 @@ import { useNavigate } from "react-router-dom"; // Import useHistory for navigat
 import emptyCart from "../assets/emptycart.json";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 
+
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [buy, setBuy] = useState(false);
+  const[lengthOfCart , setCartLength] = useState(0)
   const history = useNavigate(); // Initialize useHistory for navigation
 
   const toggleAddressModal = () => {
@@ -49,9 +51,11 @@ const Cart = () => {
           }
         }
 
-        const response = await axios.post("http://localhost:5000/cart", { userId });
+        const response = await axios.post("https://swyftserver-skrw.onrender.com/cart", { userId });
         console.log("API Response:", response.data); // Verify the data structure
         setCartItems(response.data.cartItems); // Set the state with the fetched data
+        setCartLength(response.data.cartItems.length)
+
       } catch (error) {
         console.error("Error fetching cart items:", error);
       }
@@ -62,7 +66,7 @@ const Cart = () => {
 
   const handleRemoveItem = async (itemId) => {
     try {
-      await axios.delete(`http://localhost:5000/removefromcart`, { data: { itemId } });
+      await axios.delete(`https://swyftserver-skrw.onrender.com/removefromcart`, { data: { itemId } });
       setCartItems(cartItems.filter((item) => item._id !== itemId));
       toast.success("Item Removed");
     } catch (error) {
@@ -74,11 +78,14 @@ const Cart = () => {
   const subtotal = cartItems.reduce((acc, item) => {
     const discountedPrice = item.price * (item.discount / 100);
     const finalPrice = (item.price - discountedPrice) * item.quantity;
-    return acc + finalPrice;
+    return Math.floor(acc + finalPrice);
   }, 0);
 
+
+console.log(lengthOfCart)
   return (
     <>
+
       {!buy ? (
         <>
           <Toaster />
@@ -140,6 +147,7 @@ const Cart = () => {
       ) : (
         <AddressModal />
       )}
+     
     </>
   );
 };

@@ -30,7 +30,7 @@ const DryFruits = ({ items }) => {
  
      try {
        // Call the API to update the cart
-       await axios.post('http://localhost:5000/addTocart', {
+       await axios.post('https://swyftserver-skrw.onrender.com/addTocart', {
          id: _id,
          name,
          price,
@@ -57,7 +57,7 @@ const DryFruits = ({ items }) => {
  
      try {
        // Call the API to update the cart
-       await axios.post('http://localhost:5000/remove', {
+       await axios.post('https://swyftserver-skrw.onrender.com/remove', {
          id: _id,
          userId, // Use the userId from localStorage
          quantity: Math.max((quantities[_id] || 0) - 1, 0), // Correct key

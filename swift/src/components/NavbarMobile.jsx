@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useCart } from '../components/CartContext'; // Correct import
 import { TbCategory2 } from "react-icons/tb";
 import { FaHome } from "react-icons/fa";
 import { HiShoppingCart } from "react-icons/hi";
@@ -10,6 +11,8 @@ import laptopHello from "../assets/laptophello.json";
 
 const NavbarMobile = () => {
   const [login, setLoginStatus] = useState(false);
+  const { cartLength } = useCart(); // Use the hook to get cartLength
+  console.log(cartLength);
 
   const defaultOptions = {
     loop: true,
@@ -27,7 +30,7 @@ const NavbarMobile = () => {
   return (
     <div>
       {/* Mobile and small screens */}
-      <div className="navbar-mobile fixed bottom-0 left-0 right-0 h-[12vh] bg-white shadow-lg rounded-tr-lg rounded-tl-lg flex justify-around items-center text-gray-700 md:hidden">
+      <div className="navbar-mobile fixed bottom-0 left-0 right-0 h-[12vh] bg-gray-300 shadow-lg rounded-tr-lg rounded-tl-lg flex justify-around items-center text-gray-700 md:hidden">
         <Link to="/categories">
           <div className='flex flex-col items-center text-sm'>
             <TbCategory2 className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
@@ -41,11 +44,22 @@ const NavbarMobile = () => {
           </div>
         </Link>
         <Link to="/cart">
-          <div className='flex flex-col items-center text-sm'>
-            <HiShoppingCart className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
-            <p className='mt-1'>Cart</p>
+          <div className="relative flex flex-col items-center text-sm">
+            <div className="relative">
+              <HiShoppingCart className="text-3xl text-orange-600" />
+              {cartLength > 0 ? (
+                <span className="absolute top-0 right-0 w-4 h-4 text-xs flex items-center justify-center bg-black text-white font-bold p-2 rounded-full">
+                  {cartLength}
+                </span>
+              ) : (
+                <span className="flex items-center justify-center absolute top-0 right-0 h-4 w-4 text-xs text-white bg-red-400 font-bold p-2 rounded-full">
+                  0
+                </span>
+              )}
+            </div>
+            <p className="font-semibold text-orange-500">Cart</p>
           </div>
-        </Link>
+        </Link>
         <Link to="/about">
           <div className='flex flex-col items-center text-sm'>
             <IoIosFlash className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
@@ -71,10 +85,23 @@ const NavbarMobile = () => {
           <FaHome className='text-3xl text-gray-500 hover:text-orange-600'/>
           <p className='ml-2'>Home</p>
         </Link>
-        <Link to="/cart" className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg'>
-          <HiShoppingCart className='text-3xl text-gray-500 hover:text-orange-600'/>
-          <p className='ml-2'>Cart</p>
-        </Link>
+        <Link to="/cart">
+          <div className="relative  flex bg-white shadow-lg  top-0 bottom-0 left-0 p-4  items-center ">
+            <div className="relative">
+              <HiShoppingCart className="text-3xl text-orange-600" />
+              {cartLength > 0 ? (
+                <span className="absolute top-0 right-0 w-4 h-4 text-xs flex items-center justify-center bg-black text-white font-bold p-2 rounded-full">
+                  {cartLength}
+                </span>
+              ) : (
+                <span className="flex items-center justify-center absolute top-0 right-0 h-4 w-4 text-xs text-white bg-red-400 font-bold p-2 rounded-full">
+                  0
+                </span>
+              )}
+            </div>
+            <p className="font-semibold text-orange-500 ml-2 md:text-xl">Cart</p>
+          </div>
+        </Link>
         <Link to="/about" className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg'>
           <IoIosFlash className='text-3xl text-gray-500 hover:text-orange-600'/>
           <p className='ml-2'>About</p>

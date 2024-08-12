@@ -21,7 +21,7 @@ const Loginform = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/signIn', { email, password });
+      const response = await axios.post('https://swyftserver-skrw.onrender.com/signIn', { email, password });
       if (response.data.success) {
         toast.success(response.data.message);
         
@@ -45,7 +45,7 @@ const Loginform = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/signup', { name, email, password });
+      const response = await axios.post('https://swyftserver-skrw.onrender.com/signup', { name, email, password });
       if (response.data.success) {
         toast.success(response.data.message);
         setIsSignup(false); 
