@@ -22,7 +22,7 @@ const Loginform = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://swyft-server.onrender.com/signIn', { email, password });
+      const response = await axios.post('https://swyftserver-skrw.onrender.com/signIn', { email, password });
       if (response.data.success) {
         toast.success(response.data.message);
 
