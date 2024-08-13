@@ -69,7 +69,7 @@ const Atta = ({ items }) => {
   };
 
   return (
-    <div className="grid md:ml-48 overflow-y-auto mb-10 shadow-xl backdrop-blur-lg grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:ml-64 gap-4">
+    <div className="grid md:ml-48 overflow-y-auto mb-20 md:mb-10 shadow-xl backdrop-blur-lg grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:ml-64 gap-4">
       {items.length === 0 ? (
         <p>No items available</p>
       ) : (

@@ -8,6 +8,6 @@ import { CartProvider } from './components/CartContext.jsx'
 createRoot(document.getElementById('root')).render(
   <CartProvider>
     <App />
-    </CartProvider>,
+  </CartProvider>,
    
 )

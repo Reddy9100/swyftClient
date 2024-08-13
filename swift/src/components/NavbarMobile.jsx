@@ -7,6 +7,7 @@ import { HiShoppingCart } from "react-icons/hi";
 import { IoIosFlash } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
 import Lottie from 'react-lottie';
+import { TbTruckDelivery } from "react-icons/tb";
 import laptopHello from "../assets/laptophello.json";
 
 const NavbarMobile = () => {
@@ -60,10 +61,10 @@ const NavbarMobile = () => {
             <p className="font-semibold text-orange-500">Cart</p>
           </div>
         </Link>
-        <Link to="/about">
+        <Link to="/orders">
           <div className='flex flex-col items-center text-sm'>
-            <IoIosFlash className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
-            <p className='mt-1'>About</p>
+            <TbTruckDelivery className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
+            <p className='mt-1'>Orders</p>
           </div>
         </Link>
         <div className='flex flex-col items-center text-sm' onClick={LoginFormFunction}>
@@ -102,9 +103,9 @@ const NavbarMobile = () => {
             <p className="font-semibold text-orange-500 ml-2 md:text-xl">Cart</p>
           </div>
         </Link>
-        <Link to="/about" className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg'>
-          <IoIosFlash className='text-3xl text-gray-500 hover:text-orange-600'/>
-          <p className='ml-2'>About</p>
+        <Link to="/orders" className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg'>
+          <TbTruckDelivery className='text-3xl text-gray-500 hover:text-orange-600'/>
+          <p className='ml-2'>Orders</p>
         </Link>
         <div className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg' onClick={LoginFormFunction}>
           <FaRegUserCircle className='text-3xl text-gray-500 hover:text-orange-600'/>

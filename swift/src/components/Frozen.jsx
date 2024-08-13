@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoMdAdd,IoMdRemove } from "react-icons/io";
 import axios from "axios";
 
-const Packets = ({ items }) => {
+const Frozen = ({ items }) => {
     const [quantities, setQuantities] = useState({});
 
     // Get userId from localStorage
@@ -117,4 +117,4 @@ const Packets = ({ items }) => {
     );
 };
 
-export default Packets;
+export default Frozen;

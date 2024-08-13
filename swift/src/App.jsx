@@ -10,6 +10,7 @@ import loader from "./assets/loader.json";
 import Cart from "./components/Cart";
 
 // Lazy loading components
+const Orders = lazy(() => import("./components/Orders"));
 const Categories = lazy(() => import("./components/categories"));
 const Dashboard = lazy(() => import("./components/Dashboard"));
 const Vegetables = lazy(() => import("./components/Vegetables"));
@@ -20,6 +21,7 @@ const Meat = lazy(() => import("./components/Meat"));
 const DryFruits = lazy(() => import("./components/DryFruits"));
 const BreakFast = lazy(() => import("./components/BreakFast"));
 const Packets = lazy(() => import("./components/Packets"));
+const Frozen = lazy(() => import("./components/Frozen"));
 
 // Custom Loader Component
 const Loader = () => {
@@ -50,11 +52,16 @@ const App = () => {
   const [dry, setDry] = useState([]);
   const [Breakfast, setBreakFast] = useState([]);
   const [packets, setPackets] = useState([]);
-
+  const [frozen, setFrozen] = useState([]);
+  const [biscuit , setBiscuit] = useState([])
+  const [chips,setChips] = useState([])
+  const [tea,setTea] = useState([])
+  const[juice,setJuice] = useState([])
+  const[sweet,setSweet] = useState([])
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("https://swyftserver-skrw.onrender.com/items");
+        const response = await axios.get("http://localhost:5000/items");
         setVegetables(response.data);
         setDairy(response.data);
         setAtta(response.data);
@@ -63,6 +70,12 @@ const App = () => {
         setDry(response.data);
         setBreakFast(response.data);
         setPackets(response.data);
+        setBiscuit(response.data)
+        setFrozen(response.data);
+        setChips(response.data)
+        setTea(response.data)
+        setSweet(response.data)
+        setJuice(response.data)
       } catch (error) {
         console.log("Error fetching data:", error);
       }
@@ -98,7 +111,12 @@ const App = () => {
     (item) => item.category === "breakfast"
   );
   const filterPackets = packets.filter((item) => item.category === "packets");
-
+  const filterFrozen = frozen.filter((item) => item.category === "frozen");
+  const filterBiscuit = biscuit.filter((item) => item.category === "biscuit" || item.category === "cookie")
+  const filterChips = chips.filter((item) => item.category === "chips")
+  const filterTea = tea.filter((item) => item.category ==="tea" || item.category === "coffee")
+  const filterJuice= juice.filter((item) => item.category === "juice" || item.category === "drink")
+  const filterSweet = sweet.filter((item) => item.category === "sweet")
   return (
     <div>
       {showInitialScreen ? (
@@ -137,6 +155,36 @@ const App = () => {
                   element={
                     <ProtectedRoute
                       element={() => <Vegetables items={filterVegetables} />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/tea-coffee-more"
+                  element={
+                    <ProtectedRoute
+                      element={() => <Dairy items={filterTea} />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/cold-drinks-juices"
+                  element={
+                    <ProtectedRoute
+                      element={() => <Dairy items={filterJuice} />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/sweet-cravings"
+                  element={
+                    <ProtectedRoute
+                      element={() => <Dairy items={filterSweet} />}
                       onRouteChange={handleRouteChange}
                     />
                   }
@@ -217,6 +265,46 @@ const App = () => {
                   element={
                     <ProtectedRoute
                       element={() => <Cart />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/orders"
+                  element={
+                    <ProtectedRoute
+                      element={() => <Orders />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/frozen-food"
+                  element={
+                    <ProtectedRoute
+                    element={() => <Frozen items={filterFrozen} />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/biscuits-cookies"
+                  element={
+                    <ProtectedRoute
+                    element={() => <Frozen items={filterBiscuit} />}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/munchies-chips"
+                  element={
+                    <ProtectedRoute
+                    element={() => <Frozen items={filterChips} />}
                       onRouteChange={handleRouteChange}
                     />
                   }

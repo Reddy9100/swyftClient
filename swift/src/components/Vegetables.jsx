@@ -69,7 +69,7 @@ const Vegetables = ({ items }) => {
   };
 
   return (
-    <div className="grid md:ml-48 overflow-y-auto mb-10 shadow-xl backdrop-blur-lg grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:ml-64 gap-4">
+    <div className="grid md:ml-48 overflow-y-auto mb-20 shadow-xl backdrop-blur-lg grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:ml-64 gap-4">
       {items.length === 0 ? (
         <p>No items available</p>
       ) : (
@@ -91,7 +91,7 @@ const Vegetables = ({ items }) => {
               />
             )}
             <p className="font-semibold">{item.name}</p>
-            <p>1 Piece</p>
+            <p>1 Kg</p>
             <p className="text-orange-500 font-semibold p-1 w-11 md:w-[60px] mt-1">
               ₹{item.price}
             </p>

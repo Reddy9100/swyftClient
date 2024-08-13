@@ -65,7 +65,7 @@ const Categories = () => {
   const getRandomColSpan = () => Math.floor(Math.random() * 2) + 1;
 
   return (
-    <div className='bg-white md:ml-36 lg:ml-48 xl:ml-56 h-screen overflow-y-auto'>
+    <div className='bg-white md:ml-36 lg:ml-44 xl:ml-64 h-screen overflow-y-auto'>
       <img src={bannerbird} className='h-[30vh] md:h-[50vh] w-full' alt="Banner" />
       <div className='flex mt-4 justify-around items-center'>
         <h2 className='text-lg md:text-xl font-bold'>All Categories</h2>
@@ -80,7 +80,7 @@ const Categories = () => {
           </div>
           <h2 className='text-md ml-3 md:text-lg font-bold mb-2'>Grocery & Kitchen</h2>
         </div>
-        <div className='grid mt-6 grid-cols-3 md:grid-cols-3 lg:grid-cols-4  gap-4 md:gap-20'>
+        <div className='grid mt-6 grid-cols-3 md:grid-cols-3 lg:grid-cols-4  gap-4 md:gap-y-16 lg:gap-y-24 xl:gap-y-32'>
           {categories1.map((category, index) => (
             <CategoryItem 
               key={index} 
@@ -94,14 +94,14 @@ const Categories = () => {
       </div>
 
       {/* Snacks & Drinks Section */}
-      <div className='p-4 mb-10 mt-10 md:mt-20'>
+      <div className='p-4 mb-16 md:mb-10 mt-10 md:mt-20'>
         <div className='flex items-center'>
           <div className='h-[60px] md:h-[120px] shadow-sm border border-5 border-orange-500 rounded-[90%] p-2'>
             <Lottie options={defaultOptions2} />
           </div>
           <h2 className='text-md ml-3 md:text-lg font-bold mb-2'>Snacks & Drinks</h2>
         </div>
-        <div className='grid mt-6 md:mt-10 mb-10  md:grid-cols-3 lg:grid-cols-4 grid-cols-3 gap-4 md:gap-20 md:mb-5'>
+        <div className='grid mt-6 md:mt-10 mb-10  md:grid-cols-3 lg:grid-cols-4 grid-cols-3 gap-4 md:gap-y-16 lg:gap-y-24 xl:gap-y-32 md:mb-5'>
           {categories2.map((category, index) => (
             <CategoryItem 
               key={index} 
