@@ -61,7 +61,7 @@ const Loginform = () => {
   const handleForgotPassword = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/forgot-password', { email, password });
+      const response = await axios.post('https://swyftserver-skrw.onrender.com/forgot-password', { email, password });
       if (response.data.success) {
         toast.success(response.data.message);
         setIsForgotPassword(false);

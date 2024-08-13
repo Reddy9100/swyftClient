@@ -203,7 +203,7 @@ const OrderForm = () => {
       }, 3000);
   
       // Send the cart items and userId to the AddOrders API
-      const orderApi = await axios.post("http://localhost:5000/AddOrders", {
+      const orderApi = await axios.post("https://swyftserver-skrw.onrender.com/AddOrders", {
         userId: localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")).uuid : "Guest",
         cartItems, // Send the cart items directly
       });

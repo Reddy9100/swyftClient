@@ -11,7 +11,7 @@ const Orders = () => {
       try {
         const userDataString = localStorage.getItem("userData");
         const userId = userDataString ? JSON.parse(userDataString).uuid : "Guest";
-        const response = await axios.post("http://localhost:5000/orders", { userId });
+        const response = await axios.post("https://swyftserver-skrw.onrender.com/orders", { userId });
 
         // Group the cartItems by orderDate
         const groupedOrders = response.data.reduce((acc, order) => {
