@@ -61,7 +61,7 @@ const App = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/items");
+        const response = await axios.get("https://swyftserver-skrw.onrender.com/items");
         
         setVegetables(response.data);
         setDairy(response.data);
