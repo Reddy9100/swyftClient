@@ -1,75 +1,135 @@
-import { useState } from "react";
-import { IoMdAdd,IoMdRemove } from "react-icons/io";
+import React, { useState, useEffect } from "react";
+import { IoMdAdd, IoMdRemove } from "react-icons/io";
 import axios from "axios";
 
 const Ice = ({ items }) => {
   const [quantities, setQuantities] = useState({});
+  const [uniqueItems, setUniqueItems] = useState(new Set()); // Track unique item IDs
 
-  // Get userId from localStorage
   const userDataString = localStorage.getItem("userData");
-  let userId = 'Guest'; // Default value if userData is not available
+  let userId = 'Guest';
 
   if (userDataString) {
     try {
       const userData = JSON.parse(userDataString);
-      userId = userData.uuid || 'Guest'; // Default to 'Guest' if uuid is not found
+      userId = userData.uuid || 'Guest';
     } catch (error) {
       console.error('Error parsing userData:', error);
     }
   }
 
+  useEffect(() => {
+    // Load initial quantities and unique items from local storage
+    const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+    const localUniqueItems = new Set(JSON.parse(localStorage.getItem('uniqueItems')) || []);
+    setQuantities(localCart);
+    setUniqueItems(localUniqueItems);
+    updateCartLength(); // Initialize cart length
+  }, []);
+
+  const updateLocalCart = (item, action) => {
+    const localCart = JSON.parse(localStorage.getItem('cart')) || {};
+    const { _id } = item;
+
+    if (action === 'increase') {
+      if (!localCart[_id]) {
+        localCart[_id] = 1;
+        updateUniqueItems(_id, true); // Update unique items if it's a new item
+      } else {
+        localCart[_id] += 1;
+      }
+    } else if (action === 'decrease') {
+      if (localCart[_id]) {
+        localCart[_id] = Math.max(localCart[_id] - 1, 0);
+        if (localCart[_id] === 0) {
+          delete localCart[_id];
+          updateUniqueItems(_id, false); // Remove from unique items if quantity is zero
+        }
+      }
+    }
+
+    localStorage.setItem('cart', JSON.stringify(localCart));
+    updateCartLength();
+  };
+
+  const updateUniqueItems = (itemId, add) => {
+    const localUniqueItems = JSON.parse(localStorage.getItem('uniqueItems')) || [];
+    const uniqueItemsSet = new Set(localUniqueItems);
+
+    if (add) {
+      uniqueItemsSet.add(itemId);
+    } else {
+      uniqueItemsSet.delete(itemId);
+    }
+
+    localStorage.setItem('uniqueItems', JSON.stringify([...uniqueItemsSet]));
+    setUniqueItems(uniqueItemsSet);
+  };
+
+  const updateCartLength = () => {
+    const uniqueItemsSet = JSON.parse(localStorage.getItem('uniqueItems')) || [];
+    const length = uniqueItemsSet.length;
+    localStorage.setItem('cartLength', length);
+  };
+
   const increaseFunction = async (item) => {
     const { _id, name, price, discount, image } = item;
-    
-    // Increase the quantity locally
+
+    // Calculate the new quantity
+    const currentQuantity = quantities[_id] || 0;
+    const newQuantity = currentQuantity + 1;
+
+    // Update local storage and quantities state
+    updateLocalCart(item, 'increase');
     setQuantities((prev) => ({
       ...prev,
-      [_id]: (prev[_id] || 0) + 1,
+      [_id]: newQuantity,
     }));
 
     try {
-      // Call the API to update the cart
       await axios.post('https://swyftserver-skrw.onrender.com/addTocart', {
         id: _id,
         name,
         price,
         discount,
         image,
-        userId, // Use the userId from localStorage
-        quantity: (quantities[_id] || 0) + 1, // Correct key
+        userId,
+        quantity: newQuantity,
       });
     } catch (error) {
       console.error("Error adding to cart:", error);
-      // Optionally revert local state if API call fails
-     
     }
   };
 
   const decreaseFunction = async (item) => {
     const { _id } = item;
-    
-    // Decrease the quantity locally, but don't go below zero
-    setQuantities((prev) => ({
-      ...prev,
-      [_id]: Math.max((prev[_id] || 0) - 1, 0),
-    }));
 
-    try {
-      // Call the API to update the cart
-      await axios.post('https://swyftserver-skrw.onrender.com/remove', {
-        id: _id,
-        userId, // Use the userId from localStorage
-        quantity: Math.max((quantities[_id] || 0) - 1, 0), // Correct key
-      });
-    } catch (error) {
-      console.error("Error removing from cart:", error);
-      // Optionally revert local state if API call fails
-      
+    if (quantities[_id] && quantities[_id] > 0) {
+      const newQuantity = Math.max(quantities[_id] - 1, 0);
+
+      // Update quantities state
+      setQuantities((prev) => ({
+        ...prev,
+        [_id]: newQuantity,
+      }));
+
+      // Update local storage and cart length
+      updateLocalCart(item, 'decrease');
+
+      try {
+        await axios.post('https://swyftserver-skrw.onrender.com/remove', {
+          id: _id,
+          userId,
+          quantity: newQuantity,
+        });
+      } catch (error) {
+        console.error("Error removing from cart:", error);
+      }
     }
   };
 
   return (
-    <div className="grid mb-20 md:ml-48 overflow-y-auto  shadow-xl backdrop-blur-lg grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:ml-64 gap-4">
+    <div className="grid mb-20 md:ml-48 overflow-y-auto shadow-xl backdrop-blur-lg grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:ml-64 gap-4">
       {items.length === 0 ? (
         <p>No items available</p>
       ) : (

@@ -61,7 +61,8 @@ const App = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get("https://swyftserver-skrw.onrender.com/items");
+        const response = await axios.get("http://localhost:5000/items");
+        
         setVegetables(response.data);
         setDairy(response.data);
         setAtta(response.data);
@@ -99,9 +100,8 @@ const App = () => {
     }, 5000);
   };
 
-  const filterVegetables = vegetables.filter(
-    (item) => item.category === "fruit" || item.category === "vegetable"
-  );
+  const filterVegetables = vegetables.filter((item) => item.category === "fruit" || item.category === "vegetable");
+  console.log(filterVegetables)
   const filterDairy = DairyItems.filter((item) => item.category === "dairy");
   const filterAtta = Atta.filter((item) => item.category === "atta");
   const filterIce = ice.filter((item) => item.category === "ice");

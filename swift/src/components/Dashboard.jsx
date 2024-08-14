@@ -1,51 +1,56 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import Slider from 'react-slick';
 import NavbarMobile from './NavbarMobile';
-import Lottie from 'react-lottie';
-import grocery from "../assets/dashboard.json";
-// Assuming you are using react-router-dom for navigation
+import Lottie from 'lottie-react';
+import animationData1 from '../assets/fruitsHero.json';
+import animationData2 from '../assets/coffeeHero.json';
+import animationData3 from '../assets/juiceHero.json';
+import animationData4 from '../assets/sweetHero.json';
+import animationData5 from '../assets/vegetablesHero.json';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
+  const animations = [animationData1, animationData2, animationData3, animationData4, animationData5];
 
- 
-
-  const defaultOptions = {
-    loop: true,
+  const settings = {
+   
     autoplay: true,
-    animationData: grocery,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
+    infinite: true,
+    speed: 5000, // Slow down the carousel speed
+    slidesToShow: 1,
+    autoplaySpeed: 5000,
+    slidesToScroll: 1,
+    vertical: true,
+    verticalSwiping: true,
+    adaptiveHeight: true,
+    pauseOnHover: false,
+    
   };
-  
-
-  
 
   return (
     <>
-      <div className='h-[88vh] md:ml-40 flex flex-col md:flex-row md:justify-between md:items-center bg-orange-400 md:h-screen'>
-        <div className='flex flex-col justify-center items-center md:w-1/2 p-6 md:p-12 space-y-6'>
-          <button className='p-2 text-white font-semibold text-md bg-red-500 rounded-md'>
-            Your Comfort is Our Business
-          </button>
-          <h1 className='text-2xl md:text-5xl text-white font-bold leading-tight'>
-            We Bring the <br className='hidden md:block'/> Store to Your Door
-          </h1>
-          <p className='text-md md:text-lg text-white'>
-            NOW! GET <span className='text-black font-semibold'>25%</span> OFF ON ALL ITEMS
-          </p>
-          <div className='flex justify-start'>
-            <button className='text-white bg-red-500 py-2 px-4 font-semibold rounded-md'>
-              Shop Now
-            </button>
+    <div className='overflow-x-hidden md:ml-36 lg:ml-44 xl:ml-64'>
+      <Slider {...settings}>
+        {animations.map((animation, index) => (
+          <div key={index}>
+            <div className="relative h-[100vh] bg-orange-100/55">
+              <Lottie animationData={animation} loop={true} className="w-full h-full object-cover" />
+            </div>
           </div>
-        </div>
-        
-        {/* Lottie Animation */}
-        <div className='flex items-center justify-center md:w-1/2 md:p-12'>
-          <Lottie options={defaultOptions} height={300} width={400} />
+        ))}
+      </Slider>
+
+     
+      <div className=" fixed  md:ml-36 lg:ml-44 xl:ml-64 inset-0 flex flex-col items-center justify-center md:justify-end text-center bg-opacity-0 bg-gray-900 text-clip p-4">
+        <h2 className="text-4xl font-bold mb-4 text-clip text-black">Welcome to <span className='text-purple-600 animate-pulse transition-shadow'>Swifty</span> Grocery Delivery App</h2>
+        <p className="mb-6 text-lg text-clip">Get your groceries delivered fast and fresh to your doorsteps.</p>
+        <div className="flex flex-col md:flex-row gap-4">
+          <Link to="/categories"><button className="px-8 py-3 bg-purple-600 text-white rounded-lg shadow-lg hover:bg-orange-600 transition">Shop Now</button></Link>
         </div>
       </div>
+
       <NavbarMobile />
+      </div>
     </>
   );
 };
