@@ -22,6 +22,7 @@ const DryFruits = lazy(() => import("./components/DryFruits"));
 const BreakFast = lazy(() => import("./components/BreakFast"));
 const Packets = lazy(() => import("./components/Packets"));
 const Frozen = lazy(() => import("./components/Frozen"));
+const ContactForm = lazy(() => import("./components/Contact"));
 
 // Custom Loader Component
 const Loader = () => {
@@ -145,6 +146,16 @@ const App = () => {
                   element={
                     <ProtectedRoute
                       element={Categories}
+                      onRouteChange={handleRouteChange}
+                    />
+                  }
+                />
+                <Route
+                  exact
+                  path="/contact"
+                  element={
+                    <ProtectedRoute
+                      element={ContactForm}
                       onRouteChange={handleRouteChange}
                     />
                   }

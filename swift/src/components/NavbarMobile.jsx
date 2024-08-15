@@ -79,10 +79,12 @@ const NavbarMobile = () => {
             <p className='mt-1'>Orders</p>
           </div>
         </Link>
+        <Link to="/contact">
         <div className='flex flex-col items-center text-sm' onClick={LoginFormFunction} aria-label="Contact">
           <FaRegUserCircle className='text-2xl text-gray-500 hover:text-orange-600 transition duration-200 ease-in-out'/>
           <p className='mt-1'>Contact</p>
         </div>
+        </Link>
       </div>
 
       {/* Medium and larger screens */}
@@ -127,10 +129,13 @@ const NavbarMobile = () => {
           <TbTruckDelivery className='text-3xl text-gray-500 hover:text-orange-600'/>
           <p className='ml-2'>Orders</p>
         </Link>
+        <Link to="/contact">
         <div className='flex items-center mb-4 p-3 text-sm md:text-xl bg-white bg-opacity-80 backdrop-blur-3xl border border-white/10 text-orange-600 p-2 rounded-lg shadow-lg' onClick={LoginFormFunction} aria-label="Contact">
           <FaRegUserCircle className='text-3xl text-gray-500 hover:text-orange-600'/>
           <p className='ml-2'>Contact</p>
+
         </div>
+        </Link>
       </div>
     </div>
   );

@@ -39,8 +39,6 @@ const Dashboard = () => {
           </div>
         ))}
       </Slider>
-
-     
       <div className=" fixed  md:ml-36 lg:ml-44 xl:ml-64 inset-0 flex flex-col items-center justify-center md:justify-end text-center bg-opacity-0 bg-gray-900 text-clip p-4">
         <h2 className="text-4xl font-bold mb-4 text-clip text-black">Welcome to <span className='text-purple-600 animate-pulse transition-shadow'>Swifty</span> Grocery Delivery App</h2>
         <p className="mb-6 text-lg text-clip">Get your groceries delivered fast and fresh to your doorsteps.</p>
@@ -48,8 +46,52 @@ const Dashboard = () => {
           <Link to="/categories"><button className="px-8 py-3 bg-purple-600 text-white rounded-lg shadow-lg hover:bg-orange-600 transition">Shop Now</button></Link>
         </div>
       </div>
+      
+        
+    </div>
 
+      
       <NavbarMobile />
+      <div className="bg-white bg-opacity-80 mb-20 backdrop-blur-3xl  md:ml-36 lg:ml-44 xl:ml-64  py-2 md:py-0">
+      <h1 className="text-center text-xl md:text-3xl p-2 font-bold">Our Services</h1>
+      <hr className="h-2  mx-2" />
+      <div className="md:grid md:grid-cols-3 gap-4 rounded-md  lg:grid lg:grid-cols-3 xl-grid-cols-3 m-3">
+        <div className="flex flex-col justify-center rounded-md shadow-xl hover:shadow-2xl transition-shadow duration-300 items-center p-6 m-2 mb-4 bg-white bg-opacity-80 backdrop-blur-3xl  md:p-6">
+          <div className="flex items-center justify-center w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
+            <Lottie animationData={animationData1} />
+          </div>
+          <h1 className="font-bold text-xl py-2 mt-2">Fastest Delivery</h1>
+          <p className="text-gray-500 text-md">
+            Get your groceries delivered at lightning speed! 
+            With our swift delivery service, you can count on 
+            receiving your essentials in record time—no more long 
+            waits or delays.
+          </p>
+        </div>
+        <div className="flex flex-col rounded-md shadow-xl hover:shadow-2xl transition-shadow duration-300 justify-center items-center p-6 m-2 mb-4 bg-white bg-opacity-80 backdrop-blur-3xl md:p-6">
+          <div className="flex items-center justify-center w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
+            <Lottie animationData={animationData1} />
+          </div>
+          <h1 className="font-bold text-xl py-2">Fresh Products</h1>
+          <p className="text-gray-500 text-md">
+            We offer the freshest products, carefully selected each day. 
+            Savor  the taste of quality with every bite, knowing that we 
+            prioritize your health and satisfaction.
+          </p>
+        </div>
+        <div className="flex flex-col rounded-md shadow-xl hover:shadow-2xl transition-shadow duration-300 justify-center items-center p-6 m-2 bg-white bg-opacity-80 backdrop-blur-3xl  md:p-6">
+          <div className="flex items-center justify-center w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
+            <Lottie animationData={animationData1} />
+          </div>
+          <h1 className="font-bold text-xl py-2">Contactless Payment</h1>
+          <p className="text-gray-500 text-md">
+            Enjoy a seamless and secure shopping experience with our 
+            contactless payment options. Simply scan, pay, and go—making 
+            your grocery shopping easy and worry-free.
+          </p>
+        </div>
+      </div>
+      
       </div>
     </>
   );
