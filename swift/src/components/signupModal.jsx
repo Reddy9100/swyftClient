@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Input } from 'antd';
 import { MailOutlined, LockOutlined, EyeTwoTone, EyeInvisibleOutlined } from '@ant-design/icons';
 import { GrSwift } from "react-icons/gr";
 import axios from 'axios';
 import Cookie from "js-cookie";
+
 import { Toaster, toast } from 'react-hot-toast';
 import LoginSuccess from './loginSuccess';
 import Dashboard from './Dashboard';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Loginform = () => {
   const [modal2Open, setModal2Open] = useState(true);
@@ -18,6 +19,18 @@ const Loginform = () => {
   const [name, setName] = useState('');
   const [loginSuccessState, setLoginSuccessState] = useState(false);
   const [showDashboard, setShowDashboard] = useState(false);
+
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    const token = Cookie.get("loginToken")
+    if(token){
+      navigate("/")
+    }
+    else{
+      navigate("/login")
+    }
+  })
 
   const handleLogin = async (e) => {
     e.preventDefault();
